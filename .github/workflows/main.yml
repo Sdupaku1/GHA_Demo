@@ -23,5 +23,5 @@ jobs:
           password: '${{ secrets.DOCKER_PASSWORD }}'
       - name: Run docker container from Image
         run: |
-          docker pull sudhadn/gha-demo
-          docker run -p 8080:8080 sudhadn/gha-demo
+          docker pull sudhadn/gha-demo:latest
+          docker run -p 8080:8080 sudhadn/gha-demo:latest
