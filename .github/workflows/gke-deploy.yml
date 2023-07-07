@@ -1,6 +1,5 @@
----
 name: Build and Deploy to GKE
-on:
+'on':
   - push
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
