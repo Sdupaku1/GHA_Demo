@@ -4,4 +4,6 @@ COPY src/samplecode.java .
 
 EXPOSE 8080
 
-CMD java samplecode
+RUN javac samplecode.java
+
+CMD java Simple
