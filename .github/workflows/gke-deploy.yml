@@ -1,7 +1,7 @@
 ---
 name: Build and Deploy to GKE
 on:
-  - push: null
+  - push
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: ${{ env.GKE_CLUSTER }}
