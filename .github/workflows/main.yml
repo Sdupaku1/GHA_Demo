@@ -15,7 +15,7 @@ jobs:
       - name: Build and push docker image
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
-          image: sudhadn/GHA-demo
+          image: sudhadn/gha-demo
           tags: latest
           registry: docker.io
           dockerfile: src/Dockerfile
@@ -23,5 +23,5 @@ jobs:
           password: '${{ secrets.DOCKER_PASSWORD }}'
       - name: Run docker container from Image
         run: |
-          docker pull sudhadn/GHA-demo
-          docker run -p 8080:8080 sudhadn/GHA-demo
+          docker pull sudhadn/gha-demo
+          docker run -p 8080:8080 sudhadn/gha-demo
