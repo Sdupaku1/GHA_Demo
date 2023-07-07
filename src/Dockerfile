@@ -6,4 +6,4 @@ EXPOSE 8080
 
 RUN javac samplecode.java
 
-CMD java samplecode
+CMD java samplecode.class
