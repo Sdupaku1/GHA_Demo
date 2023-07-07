@@ -9,6 +9,8 @@ jobs:
         java-version:
           - 1.8
     steps:
+      - name: checkout
+        uses: actions/checkout@v3      
       - name: Set up Java
         uses: actions/setup-java@v3
       - name: Build and push docker image
