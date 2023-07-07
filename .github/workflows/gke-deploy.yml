@@ -1,54 +1,30 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-
+---
 name: Build and Deploy to GKE
-
 on:
-  push:
-    branches:
-      - main
-
+  - push: null
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: ${{ env.GKE_CLUSTER }}    # Add your cluster name here.
-  GKE_ZONE: us-central1-c   # Add your cluster zone here.
-  DEPLOYMENT_NAME: gke-test # Add your deployment name here.
+  GKE_CLUSTER: ${{ env.GKE_CLUSTER }}
+  GKE_ZONE: us-central1-c
+  DEPLOYMENT_NAME: gke-test
   IMAGE: sudhadn/gha-demo:latest
-
 jobs:
-    name: Deploy to gke
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    # Setup gcloud CLI
-    - uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
-      with:
-        service_account_key: ${{ secrets.GKE_SA_KEY }}
-        project_id: ${{ secrets.GKE_PROJECT }}
-
-    # Configure Docker to use the gcloud command-line tool as a credential
-    # helper for authentication
-    - run: |-
-        gcloud --quiet auth configure-docker
-
-    # Get the GKE credentials so we can deploy to the cluster
-    - uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
-      with:
-        cluster_name: ${{ env.GKE_CLUSTER }}
-        location: us-central1-c
-        credentials: ${{ secrets.GKE_SA_KEY }}
-
-    # Deploy the Docker image to the GKE cluster
-    - name: Deploy
-      run: |-
-        kubectl apply -f gke-deployment-service.yml
-        kubectl get services -o wide
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
+        with:
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
+          project_id: ${{ secrets.GKE_PROJECT }}
+      - run: gcloud --quiet auth configure-docker
+      - uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: us-central1-c
+          credentials: ${{ secrets.GKE_SA_KEY }}
+      - name: Deploy
+        run: |-
+          kubectl apply -f gke-deployment-service.yml
+          kubectl get services -o wide
