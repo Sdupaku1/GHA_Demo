@@ -1,12 +1,6 @@
 name: Build and Deploy to GKE
 'on':
   - push
-env:
-  PROJECT_ID: '${{ secrets.GKE_PROJECT }}'
-  GKE_CLUSTER: '${{ env.GKE_CLUSTER }}'
-  GKE_ZONE: us-central1-c
-  DEPLOYMENT_NAME: gke-test
-  IMAGE: sudhadn/gha-demo:latest
 jobs:
   build:
     runs-on: ubuntu-latest
