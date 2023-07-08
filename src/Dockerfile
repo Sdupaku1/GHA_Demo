@@ -6,4 +6,4 @@ EXPOSE 8080
 
 RUN javac samplecode.java
 
-CMD java Simple && /bin/bash
+CMD java Simple && tail -f /dev/null
