@@ -21,7 +21,7 @@ jobs:
       - uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
         with:
           cluster_name: ${{ secrets.GKE_CLUSTER }}
-          location: us-central1-c
+          location: us-central1
           project_id: ${{ secrets.GKE_PROJECT }}
       - name: Deploy
         run: |-
