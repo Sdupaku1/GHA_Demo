@@ -25,5 +25,5 @@ jobs:
           project_id: ${{ secrets.GKE_PROJECT }}
       - name: Deploy
         run: |-
-          kubectl apply -f gke-deployment-service.yml
+          kubectl apply -f src/gke-deployment-service.yml
           kubectl get services -o wide
